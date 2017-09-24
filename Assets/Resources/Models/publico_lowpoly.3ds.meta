@@ -1,0 +1,229 @@
+fileFormatVersion: 2
+guid: 77246aa678de2e04a879a8d10366a41e
+timeCreated: 1501959891
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: asientos
+    100002: hombre.000
+    100004: hombre.003
+    100006: hombre.004
+    100008: hombre.005
+    100010: hombre.006
+    100012: hombre.007
+    100014: hombre.008
+    100016: hombre.009
+    100018: hombre.010
+    100020: hombre.011
+    100022: hombre.012
+    100024: hombre.013
+    100026: hombre.014
+    100028: hombre.015
+    100030: hombre.1
+    100032: hombre.2
+    100034: mujer.000
+    100036: mujer.002
+    100038: mujer.003
+    100040: mujer.004
+    100042: mujer.005
+    100044: mujer.006
+    100046: mujer.007
+    100048: mujer.008
+    100050: mujer.009
+    100052: mujer.1
+    100054: Plane.002
+    100056: Plane.003
+    100058: //RootNode
+    100060: suelo
+    400000: asientos
+    400002: hombre.000
+    400004: hombre.003
+    400006: hombre.004
+    400008: hombre.005
+    400010: hombre.006
+    400012: hombre.007
+    400014: hombre.008
+    400016: hombre.009
+    400018: hombre.010
+    400020: hombre.011
+    400022: hombre.012
+    400024: hombre.013
+    400026: hombre.014
+    400028: hombre.015
+    400030: hombre.1
+    400032: hombre.2
+    400034: mujer.000
+    400036: mujer.002
+    400038: mujer.003
+    400040: mujer.004
+    400042: mujer.005
+    400044: mujer.006
+    400046: mujer.007
+    400048: mujer.008
+    400050: mujer.009
+    400052: mujer.1
+    400054: Plane.002
+    400056: Plane.003
+    400058: //RootNode
+    400060: suelo
+    2300000: asientos
+    2300002: hombre.000
+    2300004: hombre.003
+    2300006: hombre.004
+    2300008: hombre.005
+    2300010: hombre.006
+    2300012: hombre.007
+    2300014: hombre.008
+    2300016: hombre.009
+    2300018: hombre.010
+    2300020: hombre.011
+    2300022: hombre.012
+    2300024: hombre.013
+    2300026: hombre.014
+    2300028: hombre.015
+    2300030: hombre.1
+    2300032: hombre.2
+    2300034: mujer.000
+    2300036: mujer.002
+    2300038: mujer.003
+    2300040: mujer.004
+    2300042: mujer.005
+    2300044: mujer.006
+    2300046: mujer.007
+    2300048: mujer.008
+    2300050: mujer.009
+    2300052: mujer.1
+    2300054: Plane.002
+    2300056: Plane.003
+    2300058: suelo
+    3300000: asientos
+    3300002: hombre.000
+    3300004: hombre.003
+    3300006: hombre.004
+    3300008: hombre.005
+    3300010: hombre.006
+    3300012: hombre.007
+    3300014: hombre.008
+    3300016: hombre.009
+    3300018: hombre.010
+    3300020: hombre.011
+    3300022: hombre.012
+    3300024: hombre.013
+    3300026: hombre.014
+    3300028: hombre.015
+    3300030: hombre.1
+    3300032: hombre.2
+    3300034: mujer.000
+    3300036: mujer.002
+    3300038: mujer.003
+    3300040: mujer.004
+    3300042: mujer.005
+    3300044: mujer.006
+    3300046: mujer.007
+    3300048: mujer.008
+    3300050: mujer.009
+    3300052: mujer.1
+    3300054: Plane.002
+    3300056: Plane.003
+    3300058: suelo
+    4300000: hombre.015
+    4300002: hombre.014
+    4300004: hombre.013
+    4300006: hombre.012
+    4300008: hombre.011
+    4300010: hombre.010
+    4300012: mujer.009
+    4300014: mujer.008
+    4300016: hombre.009
+    4300018: mujer.007
+    4300020: mujer.006
+    4300022: mujer.005
+    4300024: hombre.008
+    4300026: mujer.004
+    4300028: hombre.007
+    4300030: mujer.003
+    4300032: hombre.006
+    4300034: hombre.005
+    4300036: mujer.002
+    4300038: hombre.004
+    4300040: Plane.002
+    4300042: mujer.000
+    4300044: hombre.003
+    4300046: hombre.000
+    4300048: asientos
+    4300050: Plane.003
+    4300052: hombre.2
+    4300054: hombre.1
+    4300056: mujer.1
+    4300058: suelo
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
