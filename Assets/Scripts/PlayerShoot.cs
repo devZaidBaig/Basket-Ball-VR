@@ -15,8 +15,9 @@ public class PlayerShoot : MonoBehaviour {
     private GameObject powerSlider;
     private float currentPower;
     private float defaultPower = 15f;
+    private Touch touch;
 
-    
+
     // Update is called once per frame
     void Update () {
 
@@ -31,19 +32,19 @@ public class PlayerShoot : MonoBehaviour {
         }
         if (Application.isMobilePlatform)
         {
-            //Test in mobile
-            if (Input.GetKeyDown(KeyCode.Joystick1Button0))
+            //Test in mobile & joystick combo.
+
+            if (Input.GetKeyDown(KeyCode.Joystick1Button0) || touch.phase == TouchPhase.Began)
             {
                 currentPower = slider.minValue;
             }
-            else if (Input.GetKey(KeyCode.Joystick1Button0))
+            else if (Input.GetKey(KeyCode.Joystick1Button0) || touch.phase == TouchPhase.Stationary)
             {
                 currentPower += (Time.deltaTime * defaultPower);
                 slider.value = currentPower;
             }
-            else if (Input.GetKeyUp(KeyCode.Joystick1Button0))
+            else if (Input.GetKeyUp(KeyCode.Joystick1Button0) || touch.phase == TouchPhase.Ended)
             {
-                Debug.Log("Space function called...");
                 transported.GetComponent<Rigidbody>().useGravity = true;
                 transported.GetComponent<Rigidbody>().AddForce(camera.transform.forward * slider.value);
                 transported.GetComponent<Rigidbody>().transform.parent = GameObject.Find("Music").transform;
@@ -51,6 +52,25 @@ public class PlayerShoot : MonoBehaviour {
 
                 PlayerHolding = false;
             }
+
+            //Touch hold powerup for ball shoot.
+            if (Input.touchCount > 0)
+            {
+                var tapCount = Input.touchCount;
+                for (var i = 0; tapCount > i; i++)
+                {
+                    if (i < 1)
+                    {
+                        touch = Input.GetTouch(i);
+                    }
+                    if (touch.phase == TouchPhase.Stationary)
+                    {
+                        currentPower += (Time.deltaTime * defaultPower);
+                        slider.value = currentPower;
+                    }
+                }
+            }
+
         }
         else
         { 
