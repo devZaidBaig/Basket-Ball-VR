@@ -30,20 +30,21 @@ public class PlayerShoot : MonoBehaviour {
             transported.GetComponent<Rigidbody>().useGravity = false;
             camera = GameObject.Find("Main Camera").GetComponent<Camera>();
         }
+
         if (Application.isMobilePlatform)
         {
             //Test in mobile & joystick combo.
 
-            if (Input.GetKeyDown(KeyCode.Joystick1Button0) || touch.phase == TouchPhase.Began)
+            if (Input.GetKeyDown(KeyCode.Joystick1Button0))
             {
                 currentPower = slider.minValue;
             }
-            else if (Input.GetKey(KeyCode.Joystick1Button0) || touch.phase == TouchPhase.Stationary)
+            else if (Input.GetKey(KeyCode.Joystick1Button0))
             {
                 currentPower += (Time.deltaTime * defaultPower);
                 slider.value = currentPower;
             }
-            else if (Input.GetKeyUp(KeyCode.Joystick1Button0) || touch.phase == TouchPhase.Ended)
+            else if (Input.GetKeyUp(KeyCode.Joystick1Button0))
             {
                 transported.GetComponent<Rigidbody>().useGravity = true;
                 transported.GetComponent<Rigidbody>().AddForce(camera.transform.forward * slider.value);
@@ -57,16 +58,25 @@ public class PlayerShoot : MonoBehaviour {
             if (Input.touchCount > 0)
             {
                 var tapCount = Input.touchCount;
-                for (var i = 0; tapCount > i; i++)
+                foreach (Touch touch in Input.touches)
                 {
-                    if (i < 1)
+                    if(touch.phase == TouchPhase.Began)
                     {
-                        touch = Input.GetTouch(i);
+                        currentPower = slider.minValue;
                     }
                     if (touch.phase == TouchPhase.Stationary)
                     {
                         currentPower += (Time.deltaTime * defaultPower);
                         slider.value = currentPower;
+                    }
+                    if(touch.phase == TouchPhase.Ended)
+                    {
+                        transported.GetComponent<Rigidbody>().useGravity = true;
+                        transported.GetComponent<Rigidbody>().AddForce(camera.transform.forward * slider.value);
+                        transported.GetComponent<Rigidbody>().transform.parent = GameObject.Find("Music").transform;
+                        slider.value = slider.minValue;
+
+                        PlayerHolding = false;
                     }
                 }
             }
