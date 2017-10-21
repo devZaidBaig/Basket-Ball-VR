@@ -364,6 +364,25 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 474e5d36707267646aeb9aad05baf99e, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &39964045 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1450694973630980, guid: 474e5d36707267646aeb9aad05baf99e,
+    type: 2}
+  m_PrefabInternal: {fileID: 39964044}
+--- !u!64 &39964046
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 39964045}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 0}
 --- !u!1 &143118771
 GameObject:
   m_ObjectHideFlags: 0
@@ -2080,7 +2099,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98eaf71d20d146940ae94bc5b1e4eb71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ScoreCard: {fileID: 0}
+  ScoreCard: {fileID: 1198974571}
 --- !u!4 &1859720791 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4013582222963044, guid: f3b62d37338e80d43a5c49048ee2d14d,
@@ -2379,6 +2398,7 @@ GameObject:
   - component: {fileID: 2095457450}
   - component: {fileID: 2095457454}
   - component: {fileID: 2095457453}
+  - component: {fileID: 2095457455}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2478,3 +2498,15 @@ MonoBehaviour:
   raycasterEventMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &2095457455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2095457448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39a7943ffd17d8048bd6844334c968c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonHandler: {fileID: 0}

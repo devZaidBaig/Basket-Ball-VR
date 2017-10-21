@@ -1,9 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.IO;
-using System;
-using System.Runtime.Serialization.Formatters.Binary;
+
 
 public class AutoSave : MonoBehaviour {
 
@@ -16,21 +14,11 @@ public class AutoSave : MonoBehaviour {
 
     public void saveScore()
     {
-        BinaryFormatter br = new BinaryFormatter();
-        FileStream file = File.Open(Application.persistentDataPath + "/playerinfo.sav", FileMode.Create);
+        PlayerPrefs.SetInt("HighScore", ScoreCard.score);
 
-        PlayerScore data = new PlayerScore();
-        data.saveScore = ScoreCard.score;
-
-        br.Serialize(file, data);
-        file.Close();
-
-        Debug.Log("Score is Saved");
+        if (PlayerPrefs.GetInt("SavedScore") < PlayerPrefs.GetInt("HighScore"))
+        {
+            PlayerPrefs.SetInt("SavedScore", PlayerPrefs.GetInt("HighScore"));
+        }
     }
-}
-
-[Serializable]
-class PlayerScore
-{
-    public int saveScore;
 }

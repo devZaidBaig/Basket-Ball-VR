@@ -12,12 +12,13 @@ public class LoadScore : MonoBehaviour {
 
     void Start()
     {
-        if(PlayerPrefs.GetInt("SavedScore") < PlayerPrefs.GetInt("HighScore"))
+        if (PlayerPrefs.GetInt("SavedScore").ToString() == null)
         {
-            tempHighScore = PlayerPrefs.GetInt("HighScore");
-            PlayerPrefs.SetInt("SavedScore", tempHighScore);
+            scoreDisplay.text = "0";
         }
-        scoreDisplay.text = PlayerPrefs.GetInt("SavedScore").ToString();
-        Debug.Log("Score is loaded" + PlayerPrefs.GetInt("SavedScore"));
+        else
+        {
+            scoreDisplay.text = PlayerPrefs.GetInt("SavedScore").ToString();
+        }
     }
 }

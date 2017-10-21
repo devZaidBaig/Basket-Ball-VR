@@ -7,6 +7,7 @@ using System;
 
 public class ButtonHandler : MonoBehaviour {
 
+    public bool EnableVR = false;
     public bool activateTimer = false;
     public float timeLeft = 60f;
     private GameObject handlerDestroy;
