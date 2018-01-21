@@ -8,7 +8,7 @@ using System.Collections;
 ///</summary>
 public class MonoView : MonoBehaviour
 {
-
+    /*
     public ButtonHandler buttonHandler;
     public GameObject EditorEmulator;
     private GvrEditorEmulator gvrEE;
@@ -37,7 +37,7 @@ public class MonoView : MonoBehaviour
         if (buttonHandler.EnableVR == false)
         {
             Quaternion att = Input.gyro.attitude; //get the gyro data
-            att = Quaternion.Euler(90f, 0f, 0f) * new Quaternion(att.x, att.y, -att.z, -att.w); //reorient the gyro data with the display
+            att = Quaternion.Euler(0f, 0f, 0f) * new Quaternion(att.x, att.y, -att.z, -att.w); //reorient the gyro data with the display
             transform.rotation = att; //assign the new rotation to the camera
         }
     }
@@ -75,5 +75,6 @@ public class MonoView : MonoBehaviour
         buttonHandler.EnableVR = true;
         EnableVRCamera();
     }
+    */
 }
 

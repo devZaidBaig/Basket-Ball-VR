@@ -4,22 +4,23 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerShoot : MonoBehaviour {
-    public Camera camera;
+
+    public new Camera camera;
     public float force = 10f;
     public float distance = 0.8f;
     public bool PlayerHolding = true;
     public GameObject transported;
-    public GetBall getBall;
     public Slider slider;
 
     private GameObject powerSlider;
     private float currentPower;
     private float defaultPower = 15f;
     private Touch touch;
+    private bool direction = true;
 
 
     // Update is called once per frame
-    void Update () {
+    void FixedUpdate () {
 
         powerSlider = GameObject.FindGameObjectWithTag("Slider");
         slider = powerSlider.GetComponent<Slider>();
@@ -60,30 +61,67 @@ public class PlayerShoot : MonoBehaviour {
                 var tapCount = Input.touchCount;
                 foreach (Touch touch in Input.touches)
                 {
-                    if(touch.phase == TouchPhase.Began)
+                    if (PlayerHolding)
                     {
-                        currentPower = slider.minValue;
-                    }
-                    if (touch.phase == TouchPhase.Stationary)
-                    {
-                        currentPower += (Time.deltaTime * defaultPower);
-                        slider.value = currentPower;
-                    }
-                    if(touch.phase == TouchPhase.Ended)
-                    {
-                        transported.GetComponent<Rigidbody>().useGravity = true;
-                        transported.GetComponent<Rigidbody>().AddForce(camera.transform.forward * slider.value);
-                        transported.GetComponent<Rigidbody>().transform.parent = GameObject.Find("Music").transform;
-                        slider.value = slider.minValue;
+                        switch (touch.phase)
+                        {
+                            case TouchPhase.Began:
+                                currentPower = slider.minValue;
+                                break;
+                            case TouchPhase.Stationary:
+                                currentPower += (Time.deltaTime * defaultPower);
+                                slider.value = currentPower;
+                                break;
+                            case TouchPhase.Moved:
+                                currentPower += (Time.deltaTime * defaultPower);
+                                slider.value = currentPower;
+                                break;
+                            case TouchPhase.Ended:
+                                transported.GetComponent<Rigidbody>().useGravity = true;
+                                transported.GetComponent<Rigidbody>().AddForce(camera.transform.forward * slider.value);
+                                transported.GetComponent<Rigidbody>().transform.parent = GameObject.Find("Music").transform;
+                                slider.value = slider.minValue;
 
-                        PlayerHolding = false;
+                                PlayerHolding = false;
+                                break;
+                        }
                     }
                 }
             }
 
         }
         else
-        { 
+        {
+            if(direction && PlayerHolding)
+            {
+                slider.value += Time.deltaTime * defaultPower;
+            }
+            else
+            {
+                slider.value -= Time.deltaTime * defaultPower;
+            }
+
+            if(slider.value == slider.maxValue)
+            {
+                direction = false;
+            }
+            if(slider.value == slider.minValue)
+            {
+                direction = true;
+            }
+
+            if (Input.GetKey(KeyCode.Escape) && PlayerHolding)
+            {
+                Debug.Log("Space function called...");
+                transported.GetComponent<Rigidbody>().useGravity = true;
+                transported.GetComponent<Rigidbody>().AddForce(camera.transform.forward * slider.value);
+                transported.GetComponent<Rigidbody>().transform.parent = GameObject.Find("Music").transform;
+                slider.value = slider.minValue;
+
+                PlayerHolding = false;
+            }
+
+            /*
             //test in editor
             if (Input.GetKeyDown(KeyCode.Escape))
             {
@@ -104,6 +142,7 @@ public class PlayerShoot : MonoBehaviour {
 
                 PlayerHolding = false;
             }
+            */
         }
-	}
+    }
 }

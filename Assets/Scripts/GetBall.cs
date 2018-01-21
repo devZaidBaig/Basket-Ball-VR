@@ -6,40 +6,38 @@ using UnityEngine.UI;
 public class GetBall : MonoBehaviour {
 
     public PlayerShoot player;
-    private float TimeRemaining = 1f;
     public GameObject BallPrefab;
     public GameObject transport;
-    private GameObject ReferenceForDestroy;
-    public float timeLeft;
     public GameObject TimeObject;
-    public Text text;
+    public int NoOfTries = 5;
+    public Text TryCount;
+
+    private GameObject ReferenceForDestroy;
     private int time;
-    public ActivateCanvas CheckTimeUp;
-    public Text checkText;
+    private float TimeToCreateBall = 3f;
 
 
-	void Start () {
+    void Start () {
         CreateBall();
 	}
 
 
     void Update()
     {
-        if (Input.anyKey)
-        {
-            checkText.text = " " + (string)Input.inputString;
-        }
+        
         //Checking if the canvas is instantiated or not
-        if (CheckTimeUp.TimeUp == false)
+        if (NoOfTries != 0)
         {
             //Check if Player is holding or not
             if (player.PlayerHolding == false)
             {
-                TimeRemaining -= Time.deltaTime;
+                TimeToCreateBall -= Time.deltaTime;
 
                 //Recreate a ball after throw
-                if (TimeRemaining <= 0)
+                if (TimeToCreateBall <= 0)
                 {
+                    NoOfTries--;
+                    TryCount.text = NoOfTries + "";
                     player.PlayerHolding = true;
 
                     //Destroy The thrown ball
@@ -51,7 +49,7 @@ public class GetBall : MonoBehaviour {
                     player = ReferenceForDestroy.GetComponent<PlayerShoot>();
 
                     //Reset the time and original = reference
-                    TimeRemaining = 3f;
+                    TimeToCreateBall = 3f;
                     transport = ReferenceForDestroy;
                 }
             }
@@ -61,47 +59,15 @@ public class GetBall : MonoBehaviour {
             Destroy(transport);
             player.PlayerHolding = false;
         }
-
-        TimeMeathod(); //Countdown Timer
 }
 
     //Meathod to create ball once the scene is created
     void CreateBall()
     {
+        TryCount.text = NoOfTries + "";
         transport = Instantiate(BallPrefab, transform.position, Quaternion.identity);
         transport.transform.parent = GameObject.Find("Main Camera").transform;
         player = transport.GetComponent<PlayerShoot>();
         TimeObject = GameObject.FindGameObjectWithTag("Button");
-        timeLeft = TimeObject.GetComponent<ButtonHandler>().timeLeft;
-    }
-
-    //This is meathod is only for timer countdown
-    void TimeMeathod()
-    {
-        if (TimeObject.GetComponent<ButtonHandler>().activateTimer == true)
-        {
-            timeLeft -= Time.deltaTime;
-            time = (int)timeLeft;
-            if (timeLeft > 0)
-            {
-                text.text = time.ToString();
-            }
-            else if (timeLeft <= 0)
-            {
-                TimeObject.GetComponent<ButtonHandler>().activateTimer = false;
-                timeLeft = TimeObject.GetComponent<ButtonHandler>().timeLeft;
-            }
-        }
-    }
-
-    public void RetryCall()
-    {
-        TimeObject.GetComponent<ButtonHandler>().activateTimer = true;
-        CreateBall();
-    }
-
-    public void ChangeTagName()
-    {
-        TimeObject.transform.gameObject.tag = "UsedObject";
     }
 }

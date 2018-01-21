@@ -60,9 +60,9 @@ public class NvrSimpleGazeInputModule : PointerInputModule {
         centerOfScreen = new Vector2(Screen.width / 2, Screen.height / 2);
 #else
         // GearVR, or native Daydream/cardboard (pre 5.5.2)
-        if (VRSettings.enabled == true) {
+        if (UnityEngine.XR.XRSettings.enabled == true) {
             // Center of screen is center of eye texture width
-            centerOfScreen = new Vector2((float)VRSettings.eyeTextureWidth / 2, (float)VRSettings.eyeTextureHeight / 2);
+            centerOfScreen = new Vector2((float)UnityEngine.XR.XRSettings.eyeTextureWidth / 2, (float)UnityEngine.XR.XRSettings.eyeTextureHeight / 2);
         }
         // VR support is not on (Using Cardboard SDK)
         else {

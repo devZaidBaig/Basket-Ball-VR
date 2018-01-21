@@ -4,45 +4,76 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
+using TMPro;
 
 public class ButtonHandler : MonoBehaviour {
 
-    public bool EnableVR = false;
-    public bool activateTimer = false;
-    public float timeLeft = 60f;
-    private GameObject handlerDestroy;
+    public GameObject loadScreen;
+    public Slider loadSlider;
+    public TextMeshProUGUI loadText;
+    public List<GameObject> InstructionButtons = new List<GameObject>();
+    public List<GameObject> MainMenuButtons = new List<GameObject>();
+    public List<GameObject> NextInstruction = new List<GameObject>();
 
     public void ChangeToPlay(string SceneToPlay)
     {
+
         if (this.gameObject != null)
         {
-            SceneManager.LoadSceneAsync(SceneToPlay);
-            activateTimer = true;
-            if (SceneToPlay == "MenuScene")
-            {
-                handlerDestroy = GameObject.FindGameObjectWithTag("BallHolder");
-                handlerDestroy.GetComponent<GetBall>().ChangeTagName();
-            }
+            Debug.Log("Hello");
+            loadScreen.SetActive(true);
+            StartCoroutine(LoadAsyn(SceneToPlay));
         }
     }
 
-    public void RetryPlay()
+    private IEnumerator LoadAsyn(string sceneToPlay)
     {
-        activateTimer = true;
+        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneToPlay);
+        loadScreen.SetActive(true);
+
+        while (!operation.isDone)
+        {
+            int progress = (int) Mathf.Clamp01(operation.progress/0.9f);
+            loadSlider.value = progress;
+
+            loadText.text = progress * 100f + "%";
+            yield return null;
+        }
+    }
+
+    public void InstructionClick()
+    {
+        for (int i = 0; i < InstructionButtons.Count; i++)
+        {
+            InstructionButtons[i].SetActive(true);
+        }
+
+        for (int j = 0; j < MainMenuButtons.Count; j++)
+        {
+            MainMenuButtons[j].SetActive(false);
+        }
+    }
+
+    public void ReturnToMenu()
+    {
+        for (int i = 0; i < InstructionButtons.Count; i++)
+        {
+            InstructionButtons[i].SetActive(false);
+        }
+
+        for (int j = 0; j < MainMenuButtons.Count; j++)
+        {
+            MainMenuButtons[j].SetActive(true);
+        }
+    }
+
+    public void GoNext()
+    {
+        Debug.Log("Next Page of Instruction");
     }
 
     public void ExitGame()
     {
         Application.Quit();
-    }
-
-    void Start()
-    {
-            DontDestroyOnLoad(gameObject);
-    }
-    private void Update()
-    {
-        if (Input.GetKey(KeyCode.Joystick1Button1))
-            Input.GetTouch(1);
     }
 }
