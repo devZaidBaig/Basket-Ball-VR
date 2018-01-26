@@ -14,7 +14,7 @@ public class PlayerShoot : MonoBehaviour {
 
     private GameObject powerSlider;
     private float currentPower;
-    private float defaultPower = 15f;
+    private float defaultPower = 25f;
     private Touch touch;
     private bool direction = true;
 

@@ -9,6 +9,7 @@ public class ScoreCard : MonoBehaviour {
     public int score = 0;
     public GameObject movePlayer;
     public float speed = 1f;
+    public ParticleSystem SparkEmitter;
 
     private Vector3 randomPosition;
     private bool scored = false;
@@ -20,6 +21,7 @@ public class ScoreCard : MonoBehaviour {
             score++;
             scored = true;
             countText.text = score.ToString();
+            SparkEmitter.Play();
             randomPosition = new Vector3(UnityEngine.Random.Range(2, -3), 1.84f, UnityEngine.Random.Range(-0.5f, -1.5f));
         }
     }
