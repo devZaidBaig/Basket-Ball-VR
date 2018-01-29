@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System;
-
+using TMPro;
 
 public class ScoreCard : MonoBehaviour {
 
-    public Text countText;
+    public TextMeshProUGUI countText;
     public int score = 0;
     public GameObject movePlayer;
     public float speed = 1f;

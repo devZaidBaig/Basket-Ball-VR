@@ -35,7 +35,7 @@ public class PlayerShoot : MonoBehaviour {
         if (Application.isMobilePlatform)
         {
             //Test in mobile & joystick combo.
-
+            /*
             if (Input.GetKeyDown(KeyCode.Joystick1Button0))
             {
                 currentPower = slider.minValue;
@@ -54,6 +54,7 @@ public class PlayerShoot : MonoBehaviour {
 
                 PlayerHolding = false;
             }
+            
 
             //Touch hold powerup for ball shoot.
             if (Input.touchCount > 0)
@@ -88,6 +89,36 @@ public class PlayerShoot : MonoBehaviour {
                     }
                 }
             }
+            */
+
+            if (direction && PlayerHolding)
+            {
+                slider.value += Time.deltaTime * defaultPower;
+            }
+            else
+            {
+                slider.value -= Time.deltaTime * defaultPower;
+            }
+
+            if (slider.value == slider.maxValue)
+            {
+                direction = false;
+            }
+            if (slider.value == slider.minValue)
+            {
+                direction = true;
+            }
+
+            if ((Input.GetKey(KeyCode.Joystick1Button0) || Input.touchCount > 0) && PlayerHolding)
+            {
+                Debug.Log("Space function called...");
+                transported.GetComponent<Rigidbody>().useGravity = true;
+                transported.GetComponent<Rigidbody>().AddForce(camera.transform.forward * slider.value);
+                transported.GetComponent<Rigidbody>().transform.parent = GameObject.Find("Music").transform;
+                slider.value = slider.minValue;
+
+                PlayerHolding = false;
+            }
 
         }
         else
@@ -120,29 +151,6 @@ public class PlayerShoot : MonoBehaviour {
 
                 PlayerHolding = false;
             }
-
-            /*
-            //test in editor
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                currentPower = slider.minValue;
-            }
-            else if (Input.GetKey(KeyCode.Escape))
-            {
-                currentPower += (Time.deltaTime*defaultPower);
-                slider.value = currentPower;
-            }
-            else if (Input.GetKeyUp(KeyCode.Escape))
-            {
-                Debug.Log("Space function called...");
-                transported.GetComponent<Rigidbody>().useGravity = true;
-                transported.GetComponent<Rigidbody>().AddForce(camera.transform.forward * slider.value);
-                transported.GetComponent<Rigidbody>().transform.parent = GameObject.Find("Music").transform;
-                slider.value = slider.minValue;
-
-                PlayerHolding = false;
-            }
-            */
         }
     }
 }

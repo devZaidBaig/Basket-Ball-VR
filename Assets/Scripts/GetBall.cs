@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,7 +11,7 @@ public class GetBall : MonoBehaviour {
     public GameObject transport;
     public GameObject TimeObject;
     public int NoOfTries = 5;
-    public Text TryCount;
+    public TextMeshProUGUI TryCount;
 
     private GameObject ReferenceForDestroy;
     private int time;
