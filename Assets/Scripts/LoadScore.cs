@@ -10,6 +10,7 @@ public class LoadScore : MonoBehaviour {
     public TextMeshProUGUI scoreDisplay;
     private int tempHighScore;
 
+
     void Start()
     {
         if (PlayerPrefs.GetInt("SavedScore").ToString() == null)

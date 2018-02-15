@@ -7,11 +7,62 @@ using UnityEngine.UI;
 
 public class Manager : MonoBehaviour
 {
-    public Slider loadSlider;
-    public TextMeshProUGUI loadText;
+    public GameObject CanvasMenu;
+    public GameObject GameOverCanvas;
     public GameObject[] GameObjectToBeActivated;
     public GetBall getBall;
+    public ScoreCard scoreCard;
+    public List<GameObject> InstructionButtons = new List<GameObject>();
+    public List<GameObject> MainMenuButtons = new List<GameObject>();
+    public List<GameObject> NextInstruction = new List<GameObject>();
 
+
+    public void ChangeToPlay()
+    {
+        RetryCall();
+        CanvasMenu.SetActive(false);
+    }
+
+    public void ReturnToMenu()
+    {
+        for (int i = 0; i < InstructionButtons.Count; i++)
+        {
+            InstructionButtons[i].SetActive(false);
+        }
+
+        for (int i = 0; i < NextInstruction.Count; i++)
+        {
+            NextInstruction[i].SetActive(false);
+        }
+
+        for (int j = 0; j < MainMenuButtons.Count; j++)
+        {
+            MainMenuButtons[j].SetActive(true);
+        }
+    }
+
+    public void GoNext()
+    {
+        for (int j = 0; j < InstructionButtons.Count; j++)
+        {
+            InstructionButtons[j].SetActive(false);
+        }
+
+        for (int i = 0; i < NextInstruction.Count; i++)
+        {
+            NextInstruction[i].SetActive(true);
+        }
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
+
+    private void Start()
+    {
+       GameObjectToBeActivated[1].SetActive(false);
+    }
 
     void Update()
     {
@@ -31,32 +82,16 @@ public class Manager : MonoBehaviour
         }
     }
 
-    public void ReturnToMenu(string SceneToPlay)
+    public void ActivateCanvasMenu()
     {
-        if (this.gameObject != null)
-        {
-            loadSlider.gameObject.SetActive(true);
-            StartCoroutine(LoadAsyn(SceneToPlay));
-        }
-    }
-
-    private IEnumerator LoadAsyn(string sceneToPlay)
-    {
-        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneToPlay);
-        loadSlider.gameObject.SetActive(true);
-
-        while (!operation.isDone)
-        {
-            int progress = (int)Mathf.Clamp01(operation.progress / 0.9f);
-            loadSlider.value = progress;
-
-            loadText.text = progress * 100f + "%";
-            yield return null;
-        }
+        GameOverCanvas.SetActive(false);
+        CanvasMenu.SetActive(true);
     }
 
     public void RetryCall()
     {
-        Debug.Log("Retry Call");
+        getBall.NoOfTries = 11;
+        scoreCard.score = 0;
+        scoreCard.countText.text = 0 + "";
     }
 }

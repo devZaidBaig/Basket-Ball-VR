@@ -10,7 +10,7 @@ public class GetBall : MonoBehaviour {
     public GameObject BallPrefab;
     public GameObject transport;
     public GameObject TimeObject;
-    public int NoOfTries = 5;
+    public int NoOfTries = 10;
     public TextMeshProUGUI TryCount;
 
     private GameObject ReferenceForDestroy;
@@ -19,7 +19,7 @@ public class GetBall : MonoBehaviour {
 
 
     void Start () {
-        CreateBall();
+       // CreateBall();
 	}
 
 
