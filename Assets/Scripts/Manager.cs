@@ -1,26 +1,36 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using TMPro;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-
 public class Manager : MonoBehaviour
 {
     public GameObject CanvasMenu;
     public GameObject GameOverCanvas;
-    public GameObject[] GameObjectToBeActivated;
-    public GetBall getBall;
+    public GameObject GvrRecticlePointer;
+    public GameObject respawnPoint;
     public ScoreCard scoreCard;
+    public GameObject slider;
     public List<GameObject> InstructionButtons = new List<GameObject>();
     public List<GameObject> MainMenuButtons = new List<GameObject>();
     public List<GameObject> NextInstruction = new List<GameObject>();
+    public Transform StartPosition;
 
+    private bool Playing = false;
+    private bool MenuPositionChange = false;
+    private GameObject Player;
+    private float speed = 1f;
+
+    private void Start()
+    {
+        Player = GameObject.Find("Player");
+    }
 
     public void ChangeToPlay()
     {
         RetryCall();
+        respawnPoint.SetActive(true);
+        respawnPoint.GetComponent<GetBall>().CreateBall();
         CanvasMenu.SetActive(false);
+        Playing = true;
+        slider.SetActive(true);
     }
 
     public void ReturnToMenu()
@@ -41,7 +51,20 @@ public class Manager : MonoBehaviour
         }
     }
 
-    public void GoNext()
+    public void InstructionCall()
+    {
+        for (int j = 0; j < MainMenuButtons.Count; j++)
+        {
+            MainMenuButtons[j].SetActive(false);
+        }
+
+        for (int i = 0; i < InstructionButtons.Count; i++)
+        {
+            InstructionButtons[i].SetActive(true);
+        }
+    }
+
+    public void GoNextInstruction()
     {
         for (int j = 0; j < InstructionButtons.Count; j++)
         {
@@ -59,26 +82,28 @@ public class Manager : MonoBehaviour
         Application.Quit();
     }
 
-    private void Start()
-    {
-       GameObjectToBeActivated[1].SetActive(false);
-    }
-
     void Update()
     {
-        if (getBall.NoOfTries == 0)
+        if (!Playing)
         {
-            for (int i = 0; i < GameObjectToBeActivated.Length; i++)
-            {
-                GameObjectToBeActivated[i].SetActive(true);
-            }
+            GvrRecticlePointer.SetActive(true);
         }
         else
         {
-            for (int i = 0; i < GameObjectToBeActivated.Length; i++)
-            {
-                GameObjectToBeActivated[i].SetActive(false);
-            }
+            GvrRecticlePointer.SetActive(false);
+        }
+
+        if(respawnPoint.GetComponent<GetBall>().NoOfTries == 0 && Playing)
+        {
+            GameOverCanvas.SetActive(true);
+            Playing = false;
+        }
+
+        if (MenuPositionChange)
+        {
+            float step = speed * Time.deltaTime;
+            Player.transform.position = Vector3.MoveTowards(Player.transform.position, StartPosition.transform.position, step);
+            MenuPositionChange = false;
         }
     }
 
@@ -86,12 +111,14 @@ public class Manager : MonoBehaviour
     {
         GameOverCanvas.SetActive(false);
         CanvasMenu.SetActive(true);
+        MenuPositionChange = true;
     }
 
     public void RetryCall()
     {
-        getBall.NoOfTries = 11;
+        respawnPoint.GetComponent<GetBall>().NoOfTries = 11;
         scoreCard.score = 0;
         scoreCard.countText.text = 0 + "";
+        Playing = true;
     }
 }

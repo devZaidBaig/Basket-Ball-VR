@@ -18,11 +18,7 @@ public class GetBall : MonoBehaviour {
     private float TimeToCreateBall = 3f;
 
 
-    void Start () {
-       // CreateBall();
-	}
-
-
+    
     void Update()
     {
         
@@ -63,7 +59,7 @@ public class GetBall : MonoBehaviour {
 }
 
     //Meathod to create ball once the scene is created
-    void CreateBall()
+    public void CreateBall()
     {
         TryCount.text = NoOfTries + "";
         transport = Instantiate(BallPrefab, transform.position, Quaternion.identity);
