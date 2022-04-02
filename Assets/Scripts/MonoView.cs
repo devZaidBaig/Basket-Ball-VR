@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.VR;
 using System.Collections;
 
 ///<summary>
