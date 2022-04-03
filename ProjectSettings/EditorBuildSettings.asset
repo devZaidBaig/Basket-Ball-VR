@@ -8,3 +8,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BasketBall.unity
     guid: b4f806c05b4044c45a397b693bc4ee3b
+  m_configObjects:
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: fa425cfbaa09d2e4aa28c96cec606c00,
+      type: 2}
